@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <title>Dragon Smoke Shop | Orion, Michigan</title>
     <meta name="description" content="Dragon Smoke Shop — your one-stop shop in Orion, MI for vapes, kratom, cigars, glass, apparel, drinks, slushies & more." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%27%2310b981%27/%3E%3Ctext x=%2750%27 y=%2758%27 font-size=%2758%27 text-anchor=%27middle%27 fill=%27%23000%27%3EDS%3C/text%3E%3C/svg%3E" />
+    <!-- Fixed malformed viewBox in favicon data URL -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2310b981'/%3E%3Ctext x='50' y='58' font-size='58' text-anchor='middle' fill='%23000'%3EDS%3C/text%3E%3C/svg%3E" />
 
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- React 18 + ReactDOM (UMD) -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 
     <!-- Babel: lets us write JSX directly in this file -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -24,6 +25,9 @@
   </head>
   <body class="bg-black text-white">
     <div id="root"></div>
+    <noscript>
+      <div class="p-4 text-center bg-yellow-200 text-black">This site requires JavaScript to run.</div>
+    </noscript>
 
     <script type="text/babel">
       const {useState, useEffect} = React;
@@ -61,20 +65,20 @@
 
       const IconPhone = ({ className="" }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-             strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+             strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.31 1.78.57 2.63a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.54-.23a2 2 0 0 1 2.11.45c.85.26 1.73.45 2.63.57A2 2 0 0 1 22 16.92z" />
         </svg>
       );
       const IconMapPin = ({ className="" }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-             strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+             strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
       );
       const IconShield = ({ className="" }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-             strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+             strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
       );
@@ -109,7 +113,7 @@
                 <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>
                   <IconPhone className="mr-2 h-4 w-4" /> Call
                 </Button>
-                <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noreferrer">
+                <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noopener noreferrer">
                   <IconMapPin className="mr-2 h-4 w-4" /> Location
                 </Button>
               </div>
@@ -127,7 +131,7 @@
                 <a href="#rewards" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Rewards</a>
                 <a href="#visit" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Visit</a>
                 <a href={PHONE_TEL} className="whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-black hover:bg-emerald-400">Call</a>
-                <a href={MAPS_URL} target="_blank" rel="noreferrer" className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20">Directions</a>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20">Directions</a>
               </nav>
             </div>
           </div>
@@ -151,7 +155,7 @@
                   <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>
                     <IconPhone className="mr-2 h-5 w-5" /> Call Now
                   </Button>
-                  <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noreferrer">
+                  <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noopener noreferrer">
                     <IconMapPin className="mr-2 h-5 w-5" /> Get Directions
                   </Button>
                   <span className="ml-1 inline-flex items-center rounded-full bg-emerald-900/60 px-2.5 py-1 text-xs font-medium text-emerald-200">Massive selection</span>
@@ -264,16 +268,16 @@
                 <p className="mt-2 text-white/70">2645 S Lapeer Rd, Lake Orion (Orion Township), MI 48360</p>
                 <div className="mt-4 space-y-2 text-sm">
                   <div className="flex items-center gap-2 text-white/80"><IconPhone className="h-4 w-4 text-emerald-400" /> <a className="hover:underline" href={PHONE_TEL}>{PHONE}</a></div>
-                  <div className="flex items-center gap-2 text-white/80"><IconMapPin className="h-4 w-4 text-emerald-400" /> <a className="hover:underline" href={MAPS_URL} target="_blank" rel="noreferrer">Get Directions</a></div>
+                  <div className="flex items-center gap-2 text-white/80"><IconMapPin className="h-4 w-4 text-emerald-400" /> <a className="hover:underline" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Get Directions</a></div>
                 </div>
                 <div className="mt-3 flex gap-3">
-                  <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={MAPS_URL} target="_blank" rel="noreferrer"><IconMapPin className="mr-2 h-4 w-4" /> Directions</Button>
+                  <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={MAPS_URL} target="_blank" rel="noopener noreferrer"><IconMapPin className="mr-2 h-4 w-4" /> Directions</Button>
                   <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={PHONE_TEL}><IconPhone className="mr-2 h-4 w-4" /> Call</Button>
                 </div>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-2">
                 <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-black">
-                  <!-- Replace with a real embed later if you want -->
+                  {/* Replace with a real embed later if you want */}
                   <div className="flex h-full items-center justify-center text-white/50 text-sm">Map Embed</div>
                 </div>
               </div>
@@ -303,7 +307,7 @@
                   <p className="font-semibold">Help</p>
                   <ul className="mt-3 space-y-2 text-sm text-white/70">
                     <li><a href={PHONE_TEL} className="hover:underline">Call: {PHONE}</a></li>
-                    <li><a href={MAPS_URL} target="_blank" rel="noreferrer" className="hover:underline">Get Directions</a></li>
+                    <li><a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">Get Directions</a></li>
                     <li>Returns & Exchanges (in-store)</li>
                   </ul>
                 </div>
@@ -343,7 +347,7 @@
               <a href={PHONE_TEL} className="rounded-full bg-emerald-500 p-4 shadow-lg transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-400">
                 <IconPhone className="h-5 w-5 text-black" />
               </a>
-              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="rounded-full bg-white p-4 shadow-lg transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="rounded-full bg-white p-4 shadow-lg transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white">
                 <IconMapPin className="h-5 w-5 text-emerald-600" />
               </a>
             </div>
