@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <title>Dragon Smoke Shop | Orion, Michigan</title>
     <meta name="description" content="Dragon Smoke Shop — your one-stop shop in Orion, MI for vapes, kratom, cigars, glass, apparel, drinks, slushies & more." />
-    <!-- Fixed malformed viewBox in favicon data URL -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2310b981'/%3E%3Ctext x='50' y='58' font-size='58' text-anchor='middle' fill='%23000'%3EDS%3C/text%3E%3C/svg%3E" />
 
     <!-- Tailwind CSS (CDN) -->
@@ -30,7 +29,7 @@
     </noscript>
 
     <script type="text/babel">
-      const {useState, useEffect} = React;
+      const {useState, useEffect, useMemo} = React;
 
       // ===== Config =====
       const PHONE = "(248) 977-4864";
@@ -58,7 +57,34 @@
         { no: 11, title: "Tobacco", desc: "Loose leaf & more" },
         { no: 12, title: "Accessories", desc: "Headphones, lighters, trays" },
         { no: 13, title: "Secret / Easter-Egg", desc: "Ask in-store — limited!" },
-      ];
+      ].map(c => ({...c, slug: c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}));
+
+      // ===== Tiny Hash Router =====
+      const useHashRoute = () => {
+        const [hash, setHash] = useState(window.location.hash || '#/');
+        useEffect(() => {
+          const onHash = () => setHash(window.location.hash || '#/');
+          window.addEventListener('hashchange', onHash);
+          return () => window.removeEventListener('hashchange', onHash);
+        }, []);
+        const route = useMemo(() => {
+          // Supported: #/ (home), #/c/:slug
+          const cleaned = hash.replace(/^#/, '');
+          const parts = cleaned.split('/').filter(Boolean);
+          if (parts.length === 0) return { name: 'home' };
+          if (parts[0] === 'c' && parts[1]) return { name: 'category', slug: parts[1] };
+          return { name: 'notfound' };
+        }, [hash]);
+        return route;
+      };
+
+      const Link = ({ to, children, className }) => (
+        <a href={`#${to}`} className={className}>{children}</a>
+      );
+
+      const navigateToCategory = (slug) => {
+        window.location.hash = `#/c/${slug}`;
+      };
 
       // ===== UI helpers =====
       const cn = (...c) => c.filter(Boolean).join(" ");
@@ -105,9 +131,9 @@
                 </div>
               </div>
               <nav className="hidden gap-6 md:flex">
-                <a className="text-sm text-white/80 hover:text-white" href="#categories">Shop</a>
-                <a className="text-sm text-white/80 hover:text-white" href="#rewards">Rewards</a>
-                <a className="text-sm text-white/80 hover:text-white" href="#visit">Visit</a>
+                <a className="text-sm text-white/80 hover:text-white" href="#/">Shop</a>
+                <a className="text-sm text-white/80 hover:text-white" href="#/rewards">Rewards</a>
+                <a className="text-sm text-white/80 hover:text-white" href="#/visit">Visit</a>
               </nav>
               <div className="flex items-center gap-3">
                 <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>
@@ -127,9 +153,9 @@
           <div className="sticky top-0 z-30 border-b border-emerald-500/20 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60">
             <div className="mx-auto max-w-7xl px-2 py-2 md:px-4">
               <nav className="flex gap-2 overflow-x-auto">
-                <a href="#categories" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Shop</a>
-                <a href="#rewards" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Rewards</a>
-                <a href="#visit" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Visit</a>
+                <a href="#/" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Shop</a>
+                <a href="#/rewards" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Rewards</a>
+                <a href="#/visit" className="whitespace-nowrap rounded-full bg-emerald-700/30 px-3 py-1.5 text-xs font-medium text-emerald-200 hover:bg-emerald-600/40">Visit</a>
                 <a href={PHONE_TEL} className="whitespace-nowrap rounded-full bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-black hover:bg-emerald-400">Call</a>
                 <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/20">Directions</a>
               </nav>
@@ -204,10 +230,14 @@
           <section id="categories" className="mx-auto max-w-7xl px-4 py-16">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {CATEGORIES.map(c => (
-                <div key={c.no} className="group rounded-3xl border border-emerald-400/80 bg-gradient-to-br from-emerald-700/40 to-emerald-500/20 p-6 transition hover:-translate-y-0.5 hover:from-emerald-600/50 hover:to-emerald-400/20 hover:shadow-lg hover:shadow-emerald-400/10">
+                <button
+                  key={c.no}
+                  onClick={() => navigateToCategory(c.slug)}
+                  className="text-left group rounded-3xl border border-emerald-400/80 bg-gradient-to-br from-emerald-700/40 to-emerald-500/20 p-6 transition hover:-translate-y-0.5 hover:from-emerald-600/50 hover:to-emerald-400/20 hover:shadow-lg hover:shadow-emerald-400/10 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                >
                   <h3 className={cn("text-base", CATEGORY_TITLE_CLASS)} style={CATEGORY_TITLE_STYLE}>{c.no}. {c.title}</h3>
                   <p className="mt-1 text-sm text-white/80">{c.desc}</p>
-                </div>
+                </button>
               ))}
             </div>
             <p className="mt-6 rounded-xl border border-emerald-500/20 bg-emerald-900/20 p-4 text-sm text-emerald-200">
@@ -329,18 +359,76 @@
         );
       }
 
-      function App(){
+      // ===== Category Page =====
+      function CategoryPage({ slug }) {
+        const cat = CATEGORIES.find(c => c.slug === slug);
+        if (!cat) return (
+          <main className="mx-auto max-w-7xl px-4 py-16">
+            <p className="text-white/70">Category not found.</p>
+            <div className="mt-6"><Link to="/" className="underline decoration-emerald-400">← Back to home</Link></div>
+          </main>
+        );
+
         return (
-          <div className="min-h-screen bg-black text-white">
-            <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/30 via-black to-black" />
-            <Header />
-            <SubNav />
+          <main className="mx-auto max-w-7xl px-4 py-12">
+            <div className="mb-6 text-sm text-white/60"><Link to="/" className="underline decoration-emerald-400">Home</Link> <span className="mx-1">/</span> <span>{cat.title}</span></div>
+            <h1 className="text-3xl font-bold tracking-tight">
+              {cat.no}. <span className={CATEGORY_TITLE_CLASS} style={CATEGORY_TITLE_STYLE}>{cat.title}</span>
+            </h1>
+            <p className="mt-2 text-white/80">{cat.desc}</p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Placeholder inventory cards you can duplicate/replace later */}
+              {[1,2,3].map(i => (
+                <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="aspect-[4/3] w-full rounded-xl bg-black/40"></div>
+                  <p className="mt-3 text-sm font-medium">Sample Item {i}</p>
+                  <p className="text-xs text-white/60">Add price, flavor/strain, brand here.</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-xl border border-emerald-500/20 bg-emerald-900/20 p-4 text-sm text-emerald-200">
+              <p className="font-semibold mb-1">How to add inventory:</p>
+              <ol className="list-decimal pl-5 space-y-1">
+                <li>Duplicate a sample card and change the text/image.</li>
+                <li>Or replace this grid with data pulled from a JSON endpoint later.</li>
+                <li>Keep colors the same (black base, emerald accents, yellow neon headings).</li>
+              </ol>
+            </div>
+          </main>
+        );
+      }
+
+      // ===== Pages Switcher =====
+      function HomePage(){
+        return (
+          <div>
             <Hero />
             <TrustBar />
             <Categories />
             <PromoRows />
             <Rewards />
             <Visit />
+          </div>
+        );
+      }
+
+      function App(){
+        const route = useHashRoute();
+        return (
+          <div className="min-h-screen bg-black text-white">
+            <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400/30 via-black to-black" />
+            <Header />
+            <SubNav />
+            {route.name === 'home' && <HomePage />}
+            {route.name === 'category' && <CategoryPage slug={route.slug} />}
+            {route.name === 'notfound' && (
+              <main className="mx-auto max-w-7xl px-4 py-16">
+                <h1 className="text-2xl font-bold">Page not found</h1>
+                <div className="mt-4"><Link to="/" className="underline decoration-emerald-400">Go back home</Link></div>
+              </main>
+            )}
             <Footer />
             {/* Floating call/directions */}
             <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
