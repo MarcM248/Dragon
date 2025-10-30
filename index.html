@@ -36,13 +36,16 @@
         ? { textShadow: "0 0 8px #facc15, 0 0 16px #facc15" }
         : { textShadow: "0 0 8px #f87171, 0 0 16px #f87171" };
 
+      const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+
+      // ===== Categories (explicit slug for Vape Juice) =====
       const CATEGORIES = [
         { title: "Cigars", desc: "Premium & everyday sticks" },
         { title: "Kratom", desc: "Capsules, powders, tablets" },
         { title: "Cigarettes", desc: "Top brands & value" },
         { title: "Vapes", desc: "Disposables & devices" },
         { title: "Nicotine Pouches", desc: "ZYN, FRE, more" },
-        { title: "Vape Juice / E-Liquid", desc: "Popular flavors & sizes" },
+        { title: "Vape Juice / E-Liquid", slug: "vape-juice", desc: "Popular flavors & sizes" }, // <- slug aligned with INVENTORY key
         { title: "Blunt & Hemp Wraps", desc: "All the wraps you want" },
         { title: "THCA & CBD / Hemp", desc: "Flower, carts, gummies" },
         { title: "Mods & Coils", desc: "Setups, tanks, parts" },
@@ -50,7 +53,7 @@
         { title: "Tobacco", desc: "Loose leaf & more" },
         { title: "Accessories", desc: "Headphones, lighters, trays" },
         { title: "Secret / Easter-Egg", desc: "Ask in-store — limited!" },
-      ].map(c => ({...c, slug: c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}));
+      ].map(c => ({...c, slug: c.slug || slugify(c.title)}));
 
       // ===== Inventory Data (by category slug) =====
       const INVENTORY = {
@@ -105,6 +108,483 @@
           { name: "Dutch Masters Palma", desc: "Smooth, slightly sweet natural leaf cigar." },
           { name: "Game Cigarillos Green", desc: "Mellow smoke with subtle sweetness." },
           { name: "Phillies Blunt Original", desc: "Classic convenience-store favorite; mild and sweet." }
+        ],
+        kratom: [
+          { name: "OPMS Gold Kratom Capsules (3ct)", desc: "Popular high-concentrate extract in capsule format for convenience." },
+          { name: "OPMS Gold Kratom Capsules (5ct)", desc: "Small count pack; vendor-grade extract capsules." },
+          { name: "OPMS Gold Kratom Capsules (15ct)", desc: "Larger count for regular customers; compact and portable." },
+          { name: "OPMS Silver Maeng Da Capsules (60ct)", desc: "Maeng Da leaf in capsule form; finely milled powder inside." },
+          { name: "OPMS Silver Maeng Da Capsules (120ct)", desc: "Bigger bottle of the same trusted Maeng Da capsules." },
+          { name: "OPMS Black Liquid Extract Shot (8.8ml)", desc: "Concentrated liquid extract shot in a small vial." },
+          { name: "MIT45 Gold Liquid Extract Shot (15ml)", desc: "Well-known liquid extract; compact 15ml bottle." },
+          { name: "MIT45 Super K Extra Strong (30ml)", desc: "Extra-strength liquid extract bottle." },
+          { name: "MIT45 Raw Leaf Maeng Da Powder (125g)", desc: "Finely ground Maeng Da powder; popular everyday option." },
+          { name: "MIT45 Kratom Capsules (150ct)", desc: "Capsule format for easy measuring and portability." },
+          { name: "Hush Ultra Kratom Shot (10ml)", desc: "Compact extract shot; smooth, consistent taste." },
+          { name: "Hush Nano Kratom Shot (12ml)", desc: "Nano-style liquid extract shot in a travel-friendly size." },
+          { name: "Hush Maeng Da Capsules (75ct)", desc: "Leaf capsules; simple and consistent servings." },
+          { name: "Viva Zen Extra Strength Kratom Shot (2oz)", desc: "Ready-to-go liquid shot in a small bottle." },
+          { name: "K Shot Kratom Extract (15ml)", desc: "Classic extract shot many customers recognize." },
+          { name: "Kraken Kratom Maeng Da Powder (100g)", desc: "Vendor-grade Maeng Da powder; fine grind." },
+          { name: "Kraken Kratom Bali Gold Powder (100g)", desc: "Bali-style powder; smooth, balanced profile." },
+          { name: "Kraken Trainwreck Blend (60g)", desc: "Mixed-leaf blend in powder form; versatile option." },
+          { name: "Bumble Bee Red Borneo Capsules (150ct)", desc: "Red vein Borneo leaf packed in capsules." },
+          { name: "Bumble Bee White Maeng Da Powder (250g)", desc: "White vein Maeng Da powder; fine and consistent." },
+          { name: "Bumble Bee Green Malay Capsules (90ct)", desc: "Green Malay leaf in convenient capsules." },
+          { name: "Remarkable Herbs Bali Powder (250g)", desc: "Well-known Bali variety; finely milled." },
+          { name: "Remarkable Herbs Maeng Da Powder (250g)", desc: "Popular Maeng Da powder bag from a trusted vendor." },
+          { name: "Remarkable Herbs Green Thai Powder (250g)", desc: "Green Thai leaf powder; smooth grind." },
+          { name: "Kats Botanicals Green Maeng Da Powder (250g)", desc: "Green Maeng Da leaf powder; resealable pouch." },
+          { name: "Kats Botanicals White Maeng Da Capsules (120ct)", desc: "White vein capsules for clean, simple serving sizes." },
+          { name: "OPMS Liquid Kratom Extract (8.8ml)", desc: "Recognizable OPMS liquid vial; concentrated extract." },
+          { name: "Zion Herbals Kratom Extract Tablets (5ct)", desc: "Pressed extract tablets; easy to carry." },
+          { name: "Super Speciosa Maeng Da Capsules (180ct)", desc: "Bulk bottle of Maeng Da capsules." },
+          { name: "Super Speciosa Red Vein Powder (250g)", desc: "Classic red vein leaf powder; fine grind." },
+          { name: "Super Speciosa Variety Sample Pack", desc: "Mixed capsules and powders for customers trying options." },
+          { name: "Earth Kratom Red Bali Powder (300g)", desc: "Resealable pouch of finely milled Red Bali leaf." },
+          { name: "Earth Kratom Green Maeng Da Capsules (150ct)", desc: "Green Maeng Da in easy-serving capsules." },
+          { name: "Choice Botanicals Kratom Extract Shot (15ml)", desc: "Compact bottle extract shot." },
+          { name: "Choice Botanicals Bali Gold Capsules (90ct)", desc: "Bali Gold leaf capsules; convenient daily option." },
+          { name: "Kraken Platinum Extract Tablets (10ct)", desc: "Vendor-brand extract tablets in a small blister pack." },
+          { name: "MIT GO Black Extra Strength Shot", desc: "Pocket-sized extract shot in a squeeze pouch." },
+          { name: "Top Extracts Kratom Softgels (50ct)", desc: "Softgel format; tidy and easy to dose." },
+          { name: "PurKratom Maeng Da Capsules (100ct)", desc: "Capsules with finely milled Maeng Da leaf." }
+        ],
+        cigarettes: [
+          { name: "Marlboro Red (King)", desc: "Classic full-flavor box; king-size." },
+          { name: "Marlboro Gold (Lights) King", desc: "Gold box variant; smooth profile." },
+          { name: "Marlboro Silver Blue", desc: "Silver/blue box; balanced taste." },
+          { name: "Marlboro Black Menthol", desc: "Menthol variant in black box; king-size." },
+          { name: "Marlboro Special Blend Red", desc: "Special Blend series; box." },
+          { name: "Marlboro 72's Red", desc: "Shorter 72s size; red box." },
+          { name: "Marlboro 100's Gold", desc: "100s length; gold box." },
+          { name: "Newport Menthol (Box)", desc: "Green box menthol; king-size." },
+          { name: "Newport Menthol 100's", desc: "Menthol in 100s length; box." },
+          { name: "Newport Non-Menthol (Blue)", desc: "Non-menthol blue box; king-size." },
+          { name: "Camel Blue (Lights)", desc: "Blue box; smooth, classic Camel style." },
+          { name: "Camel Turkish Royal", desc: "Turkish-style blend in royal blue box." },
+          { name: "Camel Crush (Menthol Capsule)", desc: "Crush-style capsule; king-size box." },
+          { name: "Camel Menthol Silver", desc: "Menthol silver box; balanced profile." },
+          { name: "American Spirit Blue (Original)", desc: "Per-pack; blue box; additive-free tobacco brand.*" },
+          { name: "American Spirit Yellow (Mellow)", desc: "Yellow box; mellow taste.*" },
+          { name: "American Spirit Black (Perique Blend)", desc: "Black box; robust blend.*" },
+          { name: "Pall Mall Blue (Kings)", desc: "Blue box value brand; king-size." },
+          { name: "Pall Mall Orange (100's)", desc: "Orange box 100s; value friendly." },
+          { name: "Winston Blue (Lights)", desc: "Blue box; traditional brand variant." },
+          { name: "Winston Red (Full Flavor)", desc: "Red box; king-size classic." },
+          { name: "Parliament Lights (Kings)", desc: "Parliament recessed-filter style; king-size." },
+          { name: "Lucky Strike Original Red", desc: "Red pack; classic heritage brand." },
+          { name: "Lucky Strike Blue (Lights)", desc: "Blue pack variant; smooth profile." },
+          { name: "Virginia Slims Menthol 120's", desc: "Menthol ultra-slim 120s length." },
+          { name: "Virginia Slims Gold 120's", desc: "Slim long 120s; gold box." },
+          { name: "L&M Blue (Kings)", desc: "Blue box value brand; king-size." },
+          { name: "L&M Red (Kings)", desc: "Red box; everyday option." },
+          { name: "Benson & Hedges Gold 100's", desc: "Gold box premium; 100s length." },
+          { name: "Kool Menthol (Box)", desc: "Menthol brand staple; king-size." },
+          { name: "Maverick Gold (Kings)", desc: "Gold box value; king-size." },
+          { name: "Basic Red (Kings)", desc: "Red box economy pack; king-size." },
+          { name: "USA Gold Red (Kings)", desc: "Red box value brand; king-size." }
+        ],
+        vapes: [
+          { name: "Elf Bar BC5000 (EBDesign)", desc: "Popular rechargeable disposable; wide flavor list." },
+          { name: "Elf Bar TE6000", desc: "Rechargeable disposable; smooth draw." },
+          { name: "Lost Mary OS5000", desc: "Box-style disposable from Elf Bar family." },
+          { name: "Lost Mary MO5000", desc: "Rounded body design; strong flavor delivery." },
+          { name: "Funky Republic TI7000", desc: "Disposable with small screen; rechargeable." },
+          { name: "Geek Bar Pulse", desc: "Disposable with performance boost mode." },
+          { name: "Hyde Rebel Pro", desc: "Rechargeable disposable; compact body." },
+          { name: "Hyde IQ", desc: "Disposable with smart features; consistent vapor." },
+          { name: "Fume Extra", desc: "Simple draw-activated disposable; classic design." },
+          { name: "Fume Infinity", desc: "Larger capacity disposable option." },
+          { name: "Breeze Pro", desc: "Michigan favorite; smooth airflow disposable." },
+          { name: "Breeze Prime", desc: "Updated Breeze chassis; fast-charge disposable." },
+          { name: "Mr. Vapor Maxx", desc: "Compact disposable with popular flavors." },
+          { name: "Mr. Vapor Air", desc: "Slim disposable body; light and portable." },
+          { name: "Kangvape Onee Stick", desc: "Everyday disposable; many flavors." },
+          { name: "Esco Bars Mesh", desc: "Mesh coil disposable; strong flavor output." },
+          { name: "Juicy Bar JB5000", desc: "Rechargeable disposable; fruit-forward flavors." },
+          { name: "Flum Pebble", desc: "Rounded pebble-style disposable; rechargeable." },
+          { name: "Flum Float", desc: "Classic Flum disposable with airy draw." },
+          { name: "Fog It Box", desc: "Box disposable; mesh coil performance." },
+          { name: "R and M Tornado", desc: "Integrated tip cap; colorful designs." },
+          { name: "Suorin Air Bar Box", desc: "Box-style disposable from Air Bar line." },
+          { name: "Uwell Caliburn G2 Kit", desc: "Reliable pod system; adjustable airflow; great for salts." },
+          { name: "Uwell Caliburn G3 Kit", desc: "Newer Caliburn with improved pods; USB-C." },
+          { name: "Uwell Caliburn AK3", desc: "Slim square body; pocket friendly." },
+          { name: "Vaporesso XROS 3", desc: "XROS series pod kit; tight-to-loose draw options." },
+          { name: "Vaporesso XROS 3 Mini", desc: "Compact XROS variant with long-lasting pods." },
+          { name: "Vaporesso Luxe Q2 SE", desc: "Pod kit with textured grip and Type-C." },
+          { name: "Voopoo Drag S PNP-X Kit", desc: "Internal battery pod-mod; PnP coil support." },
+          { name: "Voopoo Drag X PNP-X Kit", desc: "External 18650 pod-mod; adjustable wattage." },
+          { name: "Voopoo Argus P1S", desc: "Transparent body pod kit; fast Type-C charge." },
+          { name: "SMOK Novo 4", desc: "Airy-to-restricted pod kit; replaceable coils." },
+          { name: "SMOK Novo 5", desc: "Screen and adjustable wattage; USB-C." },
+          { name: "SMOK Nord 4", desc: "Popular pod-mod; RPM/RPM2 coils." },
+          { name: "SMOK RPM 2 Kit", desc: "Pod-mod with larger pods and screen." },
+          { name: "GeekVape Wenax H1", desc: "Durable pod kit; leak-resistant cartridges." },
+          { name: "GeekVape Aegis Boost 2 (B60)", desc: "Rugged pod-mod; IP68 body; top airflow." },
+          { name: "OXVA Xlim Pro", desc: "Compact pod kit; strong flavor with Xlim pods." },
+          { name: "Freemax Galex Nano", desc: "Mesh pod kit; crisp taste; Type-C." },
+          { name: "USB-C Cables (Short/Long)", desc: "For recharging compatible disposables and devices." },
+          { name: "Lanyards & Silicone Cases", desc: "Keep devices secure and easy to carry." }
+        ],
+        "nicotine-pouches": [
+          { name: "ZYN Spearmint 3mg", desc: "Tobacco-free nicotine pouch; minty and clean." },
+          { name: "ZYN Spearmint 6mg", desc: "Stronger version of ZYN’s best-seller Spearmint." },
+          { name: "ZYN Cool Mint 3mg", desc: "Cool, icy mint for a refreshing pouch experience." },
+          { name: "ZYN Cool Mint 6mg", desc: "Bold mint flavor with a smooth finish." },
+          { name: "ZYN Wintergreen 3mg", desc: "Crisp wintergreen profile with medium strength." },
+          { name: "ZYN Wintergreen 6mg", desc: "Classic wintergreen punch at higher strength." },
+          { name: "ZYN Peppermint 3mg", desc: "Light peppermint flavor with cooling effect." },
+          { name: "ZYN Peppermint 6mg", desc: "Peppermint with stronger kick for regular users." },
+          { name: "ZYN Citrus 3mg", desc: "Zesty citrus blend with light sweetness." },
+          { name: "ZYN Citrus 6mg", desc: "Bright lemon-lime citrus with a balanced hit." },
+          { name: "ZYN Cinnamon 3mg", desc: "Warm cinnamon spice, gentle nicotine strength." },
+          { name: "ZYN Cinnamon 6mg", desc: "Bolder cinnamon with deeper flavor." },
+          { name: "ZYN Chill 3mg", desc: "Smooth cooling sensation; light and clean." },
+          { name: "ZYN Chill 6mg", desc: "Same flavor with added strength for regulars." },
+          { name: "ZYN Coffee 3mg", desc: "Coffee-inspired flavor; 3mg." },
+          { name: "ZYN Coffee 6mg", desc: "Rich coffee taste with strong nicotine level." },
+
+          { name: "FRE Mint 9mg", desc: "Strong mint pouch for experienced users." },
+          { name: "FRE Mint 12mg", desc: "Extra high strength mint; bold hit." },
+          { name: "FRE Wintergreen 9mg", desc: "Wintergreen punch with long-lasting freshness." },
+          { name: "FRE Mocha 9mg", desc: "Mocha coffee flavor in smooth pouch form." },
+
+          { name: "VELO Menthol 4mg", desc: "Smooth menthol with medium nicotine level." },
+          { name: "VELO Menthol 7mg", desc: "Higher intensity menthol pouches." },
+          { name: "VELO Spearmint 4mg", desc: "Clean spearmint, great daily pouch." },
+          { name: "VELO Spearmint 7mg", desc: "More power in the same great mint profile." },
+          { name: "VELO Citrus 4mg", desc: "Sweet citrus pouch for a refreshing lift." },
+          { name: "VELO Citrus 7mg", desc: "Zesty citrus, high nicotine variant." },
+
+          { name: "Rogue Peppermint 3mg", desc: "Smooth peppermint pouch; great for beginners." },
+          { name: "Rogue Peppermint 6mg", desc: "Stronger version with same fresh flavor." },
+          { name: "Rogue Wintergreen 3mg", desc: "Classic wintergreen flavor, mild strength." },
+          { name: "Rogue Wintergreen 6mg", desc: "Bold wintergreen with 6mg nicotine." },
+          { name: "Rogue Mango 3mg", desc: "Sweet tropical mango, medium strength." },
+          { name: "Rogue Mango 6mg", desc: "Tropical mango with strong nicotine level." },
+          { name: "Rogue Berry 3mg", desc: "Sweet berry flavor; easy pouch feel." },
+          { name: "Rogue Berry 6mg", desc: "Richer berry blend with stronger effect." },
+
+          { name: "on! Mint 2mg", desc: "Mini mint pouches; low strength option." },
+          { name: "on! Mint 4mg", desc: "Balanced mint pouch; great for everyday use." },
+          { name: "on! Mint 8mg", desc: "Strong mint; ultra-high strength option." },
+          { name: "on! Wintergreen 4mg", desc: "Classic wintergreen taste in compact pouch." },
+          { name: "on! Citrus 4mg", desc: "Refreshing citrus pouches; 4mg strength." },
+          { name: "on! Coffee 4mg", desc: "Coffee-flavored mini pouches; 4mg nicotine." },
+          { name: "on! Berry 4mg", desc: "Sweet berry taste; quick and light pouch." },
+
+          { name: "Juice Head Blueberry Lemon 6mg", desc: "Fruit-forward pouches; tangy and smooth." },
+          { name: "Juice Head Blueberry Lemon 12mg", desc: "Same flavor with bold 12mg strength." },
+          { name: "Juice Head Peach Pineapple 6mg", desc: "Peach-pineapple blend; juicy sweetness." },
+          { name: "Juice Head Watermelon Strawberry 12mg", desc: "Summer fruit combo, powerful kick." },
+
+          { name: "NIIN Zero Tobacco Spearmint 3mg", desc: "Clean spearmint; soft pouch feel." },
+          { name: "NIIN Zero Tobacco Spearmint 6mg", desc: "More strength, same pure mint flavor." },
+          { name: "White Fox Double Mint", desc: "Scandinavian-style pouch; bold, icy mint." },
+          { name: "White Fox Black Edition", desc: "Dark mint flavor with extra cooling hit." },
+          { name: "White Fox Fresh", desc: "Ultra-fresh pouch, Scandinavian formula." },
+
+          { name: "ZOLT Arctic Blast", desc: "Premium mint pouch; ultra-cold sensation." },
+          { name: "ZOLT Mango Ice", desc: "Tropical mango with cool finish." },
+          { name: "ZOLT Blue Razz", desc: "Sweet blue raspberry pouch; balanced kick." },
+          { name: "ZOLT Watermelon Ice", desc: "Watermelon and icy mint combo." },
+
+          { name: "Grinds Coffee Pouches – Mocha", desc: "Caffeine-based pouch alternative; mocha flavor." },
+          { name: "Grinds Coffee Pouches – Caramel", desc: "Sweet caramel flavor for non-tobacco users." }
+        ],
+
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // BLUNT & HEMP WRAPS
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        "blunt-hemp-wraps": [
+          { name: "High Hemp – Original", desc: "Classic organic hemp wraps; smooth, slow burn." },
+          { name: "High Hemp – Honey Pot Swirl", desc: "Light honey notes on an organic hemp base." },
+          { name: "High Hemp – Hydro Lemonade", desc: "Crisp lemonade vibe; clean finish." },
+          { name: "High Hemp – Maui Mango", desc: "Tropical mango aroma; even burn." },
+          { name: "High Hemp – Bananagoo", desc: "Ripe banana sweetness; mellow pull." },
+          { name: "High Hemp – Grape Ape", desc: "Juicy grape profile; easy roll." },
+          { name: "High Hemp – Blazin’ Cherry", desc: "Sweet cherry twist; low odor wrap." },
+          { name: "High Hemp – Hubba Bubba", desc: "Bubblegum hint; smooth texture." },
+          { name: "High Hemp – Area 51 (Green Apple)", desc: "Green apple tartness; sturdy wrap." },
+          { name: "High Hemp – Pineapple Paradise", desc: "Pineapple lift with balanced burn." },
+
+          { name: "Juicy Jay’s Hemp – Mango Papaya", desc: "Lush mango-papaya combo; slow burn." },
+          { name: "Juicy Jay’s Hemp – Black N’ Blueberry", desc: "Bold blueberry sweetness." },
+          { name: "Juicy Jay’s Hemp – Strawberry Fields", desc: "Strawberry aroma; pliable leaf." },
+          { name: "Juicy Jay’s Hemp – Grapes Gone Wild", desc: "Grape-forward, easy to tuck." },
+          { name: "Juicy Jay’s Hemp – Tropical Passion", desc: "Passionfruit + tropical blend." },
+          { name: "Juicy Jay’s Hemp – Mello Mango", desc: "Smooth mango with mellow finish." },
+          { name: "Juicy Jay’s Hemp – Natural", desc: "Unflavored hemp; neutral taste." },
+
+          { name: "Royal Blunts Hemparillo – Sweets", desc: "Classic sweet wrap; four per pouch." },
+          { name: "Royal Blunts Hemparillo – OGK", desc: "Earthy OG tone; flexible wrap." },
+          { name: "Royal Blunts Hemparillo – Grape", desc: "Juicy grape; steady burn." },
+          { name: "Royal Blunts Hemparillo – Strawberry", desc: "Strawberry touch; easy seal." },
+          { name: "Royal Blunts Hemparillo – Blueberry", desc: "Berry aroma; smooth draw." },
+          { name: "Royal Blunts Hemparillo – Cali Fire", desc: "Warm spice note; rolls tight." },
+          { name: "Royal Blunts XXL – Natural Leaf", desc: "Extra-wide leaf for big rolls." },
+
+          { name: "Zig-Zag Hemp – Natural", desc: "Unflavored; dependable Zig-Zag quality." },
+          { name: "Zig-Zag Hemp – Blue Dream", desc: "Berry-leaning profile; slow, even burn." },
+          { name: "Zig-Zag Hemp – Island Vibes", desc: "Tropical hint; forgiving to roll." },
+          { name: "Zig-Zag Hemp – Honey Drip", desc: "Light honey sweetness; smooth seal." },
+          { name: "Zig-Zag Hemp – Grape", desc: "Grape classic; soft and pliable." },
+
+          { name: "Twisted Hemp – California Dream", desc: "Balanced fruit; four hemp wraps." },
+          { name: "Twisted Hemp – Endless Summer", desc: "Tropical mix; thin but sturdy." },
+          { name: "Twisted Hemp – Tropical Breeze", desc: "Citrus + pineapple kiss." },
+          { name: "Twisted Hemp – Grape Burst", desc: "Punchy grape; steady combustion." },
+          { name: "Twisted Hemp – Just Hemp (Plain)", desc: "Neutral hemp, no added flavor." },
+
+          { name: "Hemp Zone – Kush", desc: "Herbal tone; budget-friendly 5-pack." },
+          { name: "Hemp Zone – Sweet", desc: "Light sweet tip; soft texture." },
+          { name: "Hemp Zone – Grape", desc: "Classic grape; consistent thickness." },
+          { name: "Hemp Zone – Vanilla", desc: "Smooth vanilla aroma." },
+          { name: "Hemp Zone – Honey Lemonade", desc: "Citrus + honey accent." },
+
+          { name: "King Palm Minis – Banana Cream", desc: "2 minis; squeeze-to-activate flavor tip." },
+          { name: "King Palm Minis – Magic Mint", desc: "Minty cool; corn-husk filter." },
+          { name: "King Palm Minis – Berry Terps", desc: "Berry terp pearls; slow burn." },
+          { name: "King Palm Minis – Watermelon Wave", desc: "Watermelon splash; easy pack." },
+          { name: "King Palm Slims – Mango OG", desc: "Longer slims; mango note." },
+          { name: "King Palm Rollies – Lemon Haze", desc: "Small rolls; bright lemon." },
+
+          { name: "Tyson Ranch x Futurola – Blunt Cones (King)", desc: "Tobacco-free blunt cones; even draw." },
+          { name: "Tyson Ranch x Futurola – Blunt Cones (1¼)", desc: "Smaller size; easy fill." },
+          { name: "Futurola Tobacco-Free Blunt Wraps – Natural", desc: "Paper-style blunt wraps; neutral taste." },
+
+          { name: "Primal Herbal Wraps – Chocolate", desc: "Cocoa aroma; smooth seal." },
+          { name: "Primal Herbal Wraps – Chamomile", desc: "Floral calm; slow burn." },
+          { name: "Lion Rolling Circus Hemp – Strawberry", desc: "Strawberry zing; thin and sturdy." },
+          { name: "Lion Rolling Circus Hemp – Blueberry", desc: "Berry note; flexible sheet." },
+          { name: "Cyclones Hemparillo Cones – Sugar Cane", desc: "Pre-rolled hemp cones; sweet tip." },
+
+          { name: "Fronto King – Dark Leaf", desc: "Whole dark leaf; rich aroma." },
+          { name: "Fronto King – Medium Leaf", desc: "Balanced body; easy to trim." },
+          { name: "Grabba Leaf – Whole Natural", desc: "Natural whole leaf; customize size." },
+          { name: "CT Fronto – Natural", desc: "Connecticut shade style; smooth texture." },
+          { name: "Red Herring Fronto – Extra Dark", desc: "Bold, heavy leaf; slow burn." },
+
+          { name: "Juicy Blunt Rolls – Watermelon", desc: "Tobacco-free; juicy watermelon." },
+          { name: "Juicy Blunt Rolls – Blueberry", desc: "Berry aroma; easy to shape." },
+          { name: "Purple Wraps – Natural", desc: "Neutral profile; consistent thickness." },
+          { name: "Purple Wraps – Sweet", desc: "Slightly sweet finish." },
+
+          { name: "Blunt Glue – Natural (Sugarcane)", desc: "Food-grade sealant; mess-free finish." },
+          { name: "Glass Tips – Reusable (Straight)", desc: "Reusable tips; cooler, cleaner pull." },
+          { name: "Glass Tips – Reusable (Pinched)", desc: "Anti-scoot grip; fits most wraps." },
+          { name: "Packing Sticks – Bamboo (2-pack)", desc: "For King Palm & cones; tighter pack." },
+          { name: "Hemp Wick – 10ft", desc: "Beeswax-coated hemp; clean light." }
+        ],
+
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // THCA & CBD / HEMP
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        "thca-cbd-hemp": [
+          // THCA Flower (hemp-derived; <0.3% Δ9 per dry weight)
+          { name: "THCA Flower – Ice Cream Cake (3.5g)", desc: "Dense buds; sweet, creamy aroma." },
+          { name: "THCA Flower – Gelato 41 (3.5g)", desc: "Dessert terp notes; well-trimmed nugs." },
+          { name: "THCA Flower – Apple Fritter (3.5g)", desc: "Crisp apple pastry scent; sticky cure." },
+          { name: "THCA Flower – Gush Mints (3.5g)", desc: "Minty sweet profile; frosty finish." },
+          { name: "THCA Flower – Oreoz (3.5g)", desc: "Dark cookies aroma; heavy frosting look." },
+          { name: "THCA Flower – Pineapple Express (3.5g)", desc: "Tropical nose; bright green color." },
+          { name: "THCA Flower – Blue Dream (3.5g)", desc: "Blueberry forward; balanced structure." },
+          { name: "THCA Flower – Wedding Cake (3.5g)", desc: "Vanilla cake scent; tight trim." },
+          { name: "THCA Flower – Zkittlez (3.5g)", desc: "Candy fruit notes; multicolor flecks." },
+          { name: "THCA Flower – Runtz (3.5g)", desc: "Sweet candy nose; good hand-feel." },
+          { name: "THCA Flower – Donny Burger (7g)", desc: "Savory-gassy profile; larger jar." },
+          { name: "THCA Flower – Jealousy (7g)", desc: "Bold dessert funk; showcase jar." },
+
+          // THCA Pre-Rolls
+          { name: "THCA Pre-Roll – Rainbow Belts (1g)", desc: "Cone-style; smooth, candy terp note." },
+          { name: "THCA Pre-Roll – Lemon Cherry Gelato (1g)", desc: "Citrus dessert aroma; even burn." },
+          { name: "THCA Pre-Roll – Gary Payton (1g)", desc: "Gas + cookie dough scent; firm pack." },
+          { name: "THCA Mini Pre-Rolls – Mixed (5 x 0.5g)", desc: "Sampler tin; assorted strains." },
+          { name: "THCA Diamond-Infused Pre-Roll – Kush Mints (1.5g)", desc: "Rolled with THCA diamonds; slow burn." },
+          { name: "THCA Kief-Dusted Pre-Roll – Grape Gas (1.25g)", desc: "Kief-coated finish; flavorful pull." },
+
+          // THCA Vapes (carts)
+          { name: "THCA Cart 1g – Wedding Cake", desc: "Glass cart; ceramic coil; dessert terps." },
+          { name: "THCA Cart 1g – Blue Zkittlez", desc: "Fruit candy profile; smooth draw." },
+          { name: "THCA Cart 1g – Super Lemon Haze", desc: "Bright citrus; crisp inhale." },
+          { name: "THCA Cart 1g – Strawberry Cough", desc: "Berry top note; balanced vapor." },
+          { name: "THCA Cart 1g – Pineapple Express", desc: "Tropical profile; consistent coil." },
+          { name: "THCA Cart 2g – Gelato 33", desc: "High-capacity tank; dessert aroma." },
+          { name: "THCA Cart 2g – Apple Fritter", desc: "Bigger cart; crisp pastry note." },
+          { name: "THCA Cart 2g – Mango Kush", desc: "Tropical mango nose; reliable hardware." },
+
+          // THCA Disposables
+          { name: "THCA Disposable 2g – Rainbow Sherbet", desc: "USB-C recharge; mesh coil device." },
+          { name: "THCA Disposable 2g – Gushers", desc: "Candy fruit terp; consistent output." },
+          { name: "THCA Disposable 3g – Cereal Milk", desc: "Large reservoir; dessert profile." },
+          { name: "THCA Disposable 3g – Georgia Pie", desc: "Peach pastry aroma; smooth draw." },
+          { name: "THCA Disposable 4g – Northern Lights", desc: "Long-lasting device; classic pine note." },
+          { name: "THCA Disposable 4g – Blackberry Kush", desc: "Dark berry nose; even performance." },
+
+          // CBD Gummies (hemp-derived; clearly labeled mg per jar)
+          { name: "CBD Gummies – Mixed Fruit (750mg)", desc: "30ct jar; ~25mg each; pectin-based." },
+          { name: "CBD Gummies – Watermelon Rings (1000mg)", desc: "Sugar-coated rings; vegan recipe." },
+          { name: "CBD Gummies – Blue Razz (1500mg)", desc: "High-mg jar; lab-tested batch." },
+          { name: "CBD Gummies – Peach Rings (750mg)", desc: "Classic peach ring style; clear label." },
+          { name: "CBD Gummies – Sour Worms (1000mg)", desc: "Tangy worms; consistent texture." },
+          { name: "CBD+CBN Night Gummies – Berry (900mg)", desc: "Evening formula; mixed cannabinoids." },
+          { name: "CBD+CBG Day Gummies – Citrus (900mg)", desc: "Daytime blend; citrus flavor." },
+          { name: "Delta-9 Compliant Gummies – Strawberry (10mg ea)", desc: "Hemp-derived; compliant per serving." },
+
+          // CBD Tinctures
+          { name: "CBD Tincture 1000mg – Natural", desc: "MCT carrier; graduated dropper." },
+          { name: "CBD Tincture 2000mg – Mint", desc: "Mint flavor; batch QR code." },
+          { name: "Full-Spectrum CBD Tincture 1500mg – Citrus", desc: "Hemp extract; citrus note." },
+          { name: "Broad-Spectrum CBD Tincture 1500mg – Berry", desc: "THC-free broad spectrum; berry taste." },
+
+          // CBD Topicals
+          { name: "CBD Freeze Roll-On 1000mg", desc: "Roll-on applicator; mentholated feel." },
+          { name: "CBD Balm 1000mg – Eucalyptus", desc: "Beeswax base; eucalyptus aroma." },
+          { name: "CBD Lotion 1000mg – Unscented", desc: "Everyday lotion; pump bottle." },
+          { name: "CBD Salve 2000mg – Cooling", desc: "High-mg tin; smooth spread." },
+
+          // CBD/CBN/CBG Vapes (non-THCA)
+          { name: "CBD Vape Cart 1g – Strawberry Fields", desc: "Ceramic cart; gentle strawberry note." },
+          { name: "CBD Vape Cart 1g – OG Kush (Terpene Blend)", desc: "Botanical terps; classic profile." },
+          { name: "CBD/CBN Night Cart 1g – Blueberry", desc: "Evening terp blend; glass cart." },
+          { name: "CBD/CBG Day Cart 1g – Lemon Haze", desc: "Citrus terpene blend; bright notes." },
+
+          // Pet CBD
+          { name: "Pet CBD Oil 500mg – Salmon", desc: "Dropper bottle; easy mix-in." },
+          { name: "Pet CBD Chews 300mg – Chicken", desc: "Soft chews; re-sealable pouch." },
+
+          // Hemp Drinks
+          { name: "Hemp Seltzer – Lemon (25mg CBD)", desc: "12oz can; light lemon sparkle." },
+          { name: "Hemp Seltzer – Black Cherry (25mg CBD)", desc: "12oz can; crisp cherry finish." },
+
+          // THCA Diamonds & Concentrates
+          { name: "THCA Diamonds 1g – Unflavored", desc: "Glass puck; clear crystalline." },
+          { name: "THCA Live Rosin 1g – Trop Cookies", desc: "Solventless rosin; tropical nose." },
+          { name: "THCA Badder 1g – Candy Gas", desc: "Whipped texture; sweet-gassy aroma." },
+
+          // CBD Capsules & Misc
+          { name: "CBD Softgels 25mg (30ct)", desc: "Once-daily format; easy travel." },
+          { name: "CBD Isolate Powder 1g (99%)", desc: "Unflavored isolate; scoop included." },
+          { name: "CBD Honey Sticks (10-pack)", desc: "Single-serve sticks; easy mix-in." },
+          { name: "CBD Bath Bomb – Lavender (100mg)", desc: "Single bath fizzer; relaxing scent." }
+        ],
+
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // VAPE JUICE / E-LIQUID
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        "vape-juice": [
+          { name: "Air Factory Blue Razz", desc: "Sweet and tangy blue raspberry blend." },
+          { name: "Air Factory Strawberry Kiwi", desc: "Juicy strawberry with kiwi twist." },
+          { name: "Juice Head Watermelon Lime", desc: "Refreshing combo of melon and lime." },
+          { name: "Juice Head Strawberry Kiwi Freeze", desc: "Classic strawberry kiwi with menthol chill." },
+          { name: "Naked 100 Lava Flow", desc: "Pineapple, coconut, and strawberry fusion." },
+          { name: "Naked 100 Hawaiian POG", desc: "Passion fruit, orange, guava trio." },
+          { name: "Naked 100 Really Berry", desc: "Blueberry, blackberry, lemon zest mix." },
+          { name: "Coastal Clouds Apple Peach Strawberry", desc: "Fruit medley; crisp and sweet." },
+          { name: "Coastal Clouds Mango Berries", desc: "Ripe mango and sweet berries flavor." },
+          { name: "Candy King Worms", desc: "Gummy candy flavor with sour finish." },
+          { name: "Candy King Strawberry Watermelon Bubblegum", desc: "Chewy bubblegum with fruity mix." },
+          { name: "Pacha Syn Salt Fuji Pear Mango", desc: "Balanced fruit trio with smooth throat hit." },
+          { name: "Pacha Syn Salt Blue Razz Ice", desc: "Blue raspberry with cool finish." },
+          { name: "Pod Juice Jewel Mint", desc: "Signature mint e-liquid; crisp and icy." },
+          { name: "Pod Juice Strawberry Banana", desc: "Smooth blend of classic fruits." },
+          { name: "Monster Vape Labs Strawberry Jam", desc: "Jam-flavored e-liquid with buttery undertone." },
+          { name: "Monster Vape Labs Banana Ice", desc: "Banana sweetness with icy cool exhale." },
+          { name: "Dinner Lady Lemon Tart", desc: "Award-winning dessert blend of lemon and meringue." },
+          { name: "Keep It 100 Blue Slushie", desc: "Blue raspberry slushy style juice." },
+          { name: "Keep It 100 Milk Strawberry", desc: "Creamy strawberry milk e-liquid." },
+          { name: "Vapetasia Killer Kustard", desc: "Vanilla custard classic, creamy and rich." },
+          { name: "Vapetasia Peach Lemonade", desc: "Tangy lemonade with ripe peach." },
+          { name: "Cloud Nurdz Blue Raspberry Peach", desc: "Candy-style blue razz peach mix." },
+          { name: "Cloud Nurdz Strawberry Grape", desc: "Juicy strawberry-grape candy combo." },
+          { name: "The Milkman Vanilla Custard", desc: "Smooth custard with creamy vanilla." },
+          { name: "The Milkman Churrios", desc: "Cinnamon sugar pastry flavor." },
+          { name: "Bad Drip God Nectar", desc: "Passion fruit, orange, guava, and mango medley." },
+          { name: "Bad Drip Don’t Care Bear", desc: "Gummy bears; sweet and tangy profile." },
+          { name: "Humble Donkey Kahn", desc: "Strawberry banana with tropical twist." },
+          { name: "Humble Pee Wee Kiwi", desc: "Kiwi, watermelon, apple, and citrus flavor." },
+          { name: "BLVK Unicorn Lychee", desc: "Lychee fruit; floral and sweet." },
+          { name: "BLVK Unicorn Mango Ice", desc: "Tropical mango with menthol chill." },
+          { name: "Ruthless Ez Duz It", desc: "Strawberry and watermelon fusion." },
+          { name: "Ruthless Grape Drank", desc: "Grape soda inspired flavor." },
+          { name: "Finest Salt Strawberry Custard", desc: "Rich custard base with strawberries." },
+          { name: "Finest Salt Apple Peach Sour", desc: "Sour candy style apple-peach mix." },
+          { name: "Twist Pink Punch Lemonade", desc: "Tart lemonade with pink punch sweetness." },
+          { name: "Twist Honeydew Melon Chew", desc: "Honeydew candy flavor with chewy finish." },
+          { name: "Air Factory Arctic Berry", desc: "Frosted mixed berry blend." },
+          { name: "Air Factory Mint", desc: "Pure menthol mint; clean and refreshing." },
+
+          // Added list
+          { name: "Jam Monster Blueberry", desc: "Blueberry jam on toast vibe." },
+          { name: "Jam Monster Raspberry", desc: "Sweet-tart raspberry jam finish." },
+          { name: "Sadboy Butter Cookie", desc: "Buttery cookie with light lemon." },
+          { name: "Sadboy Strawberry Jam Cookie", desc: "Strawberry jam layered cookie." },
+          { name: "Skwezed Peach", desc: "Ripe peach nectar, clean exhale." },
+          { name: "Skwezed Green Apple", desc: "Crisp green apple with tart snap." },
+          { name: "Skwezed Mango Ice", desc: "Mango nectar with cool finish." },
+          { name: "Fruitia Blood Orange Cactus Cooler", desc: "Citrus pop with cactus twist." },
+          { name: "Fruitia Pineapple Citrus Twist", desc: "Pineapple, lemon-lime sparkle." },
+          { name: "Fruitia Blue Raspberry", desc: "Bold blue razz with candy edge." },
+          { name: "Charlie's Chalk Dust Pachamama Fuji Apple Strawberry Nectarine", desc: "Layered orchard fruits." },
+          { name: "Charlie's Chalk Dust Black Ice", desc: "Blackberry with menthol licorice hint." },
+          { name: "Yami Vapor Taruto", desc: "Custard tart pastry; creamy-sweet." },
+          { name: "Yami Vapor Butter Brew", desc: "Butterscotch cream drink profile." },
+          { name: "Nasty Juice Slow Blow", desc: "Pineapple lemonade with a chill." },
+          { name: "Nasty Juice ASAP Grape", desc: "Sweet grape with light mint." },
+          { name: "Nasty Berry Broski", desc: "Mixed berries with slight ice." },
+          { name: "Glas Basix Banana Cream Pie", desc: "Banana custard, pie crust, caramel." },
+          { name: "Glas Basix Fizzy Lemonade", desc: "Sparkling lemon with ice." },
+          { name: "Milk By Monster (Milk Custard)", desc: "Thick milk custard dessert." },
+          { name: "Custard Monster Vanilla", desc: "Dense vanilla custard classic." },
+          { name: "Custard Monster Strawberry", desc: "Strawberry folded into custard." },
+          { name: "Mr. Freeze Blue Razz Ice", desc: "Punchy blue razz with menthol." },
+          { name: "Mr. Freeze Strawberry Watermelon Frost", desc: "Sweet fruit duo with frost." },
+          { name: "Purple Bomb (VGOD) Grape", desc: "Grape candy with bold sweetness." },
+          { name: "Lush Ice (VGOD)", desc: "Watermelon with a chilling finish." },
+          { name: "Ripe Collection Kiwi Dragon Berry", desc: "Kiwi, blueberry, dragonfruit trio." },
+          { name: "Ripe Collection Peachy Mango Pineapple", desc: "Tropical fruit blend, smooth." },
+          { name: "Barista Brew Salt Caramel Macchiato", desc: "Coffeehouse caramel latte notes." },
+          { name: "Barista Brew Strawberry Watermelon Refresher", desc: "Fruity café refresher style." },
+          { name: "Kilo Kiberry Yogurt", desc: "Kiwi strawberry in creamy yogurt." },
+          { name: "Kilo Dewberry Cream", desc: "Honeydew berry with cream body." },
+          { name: "Oxbar Mango Lychee Ice", desc: "Mango-lychee duet with chill." },
+          { name: "Daze (7 Daze) Reds Apple", desc: "Straight red apple juice taste." },
+          { name: "Daze (7 Daze) Reds Apple Grape", desc: "Apple-grape juice blend." },
+          { name: "Daze (7 Daze) Reds Apple Iced", desc: "Apple juice with cool kick." },
+          { name: "Kangaroo Kustard Vanilla", desc: "Classic vanilla custard profile." },
+          { name: "Bazooka Sour Straws Blue Raspberry", desc: "Blue razz sour straw candy." },
+          { name: "Bazooka Sour Straws Watermelon", desc: "Tangy watermelon licorice candy." },
+          { name: "Zermatt Alpine Mint", desc: "Clean alpine mint, crisp exhale." },
+          { name: "Azul Berries by Naked X", desc: "Blueberry, raspberry, cream collab." },
+          { name: "One Hit Wonder Muffin Man", desc: "Apple cinnamon muffin bakery." },
+          { name: "One Hit Wonder The Man", desc: "Strawberry milk classic profile." },
+          { name: "Loaded Glazed Donut", desc: "Warm glazed donut sweetness." },
+          { name: "Loaded Cran Apple", desc: "Cranberry-apple tart blend." },
+          { name: "Puff Labs Circus Cookie", desc: "Frosted pink circus cookie." },
+          { name: "Air Factory Crisp Apple", desc: "Bright pressed apple finish." },
+          { name: "Air Factory Berry Rush", desc: "Mixed berry chewy candy." },
+          { name: "Twisted Sour Green Apple", desc: "Puckering green apple sour." },
+          { name: "Twisted Sour Blue Razz", desc: "Sour blue razz candy pop." },
+          { name: "Finest Fruit Edition Lychee Dragon", desc: "Lychee with dragonfruit lift." },
+          { name: "Finest Fruit Edition Berry Blast", desc: "Mixed berries with candy edge." },
+          { name: "Keep It 100 Tropical Blast", desc: "Pineapple, guava, citrus splash." },
+          { name: "Keep It 100 Apple Cider Donut", desc: "Fall donut with cinnamon sugar." },
+          { name: "Cloud Nurdz Grape Apple Ice", desc: "Grape-apple candy with ice." },
+          { name: "Cloud Nurdz Watermelon Berry", desc: "Watermelon with mixed berries." },
+          { name: "Pacha Syn Salt Strawberry Watermelon", desc: "Smooth salt fruit pairing." },
+          { name: "Pacha Syn Salt Pineapple Ice", desc: "Pineapple with cool breeze." },
+          { name: "Pod Juice Blue Razz Cotton Clouds", desc: "Fair-cotton blue razz twist." },
+          { name: "Pod Juice Watermelon Bubblegum", desc: "Bubblegum with juicy melon." },
+          { name: "Ruthless Jungle Fever", desc: "Pineapple, mango, citrus medley." },
+          { name: "Ruthless Strizzy", desc: "Strawberry, raspberry, kiwi trio." },
+          { name: "BLVK Unicorn UniChew", desc: "Chewy strawberry candy vibe." },
+          { name: "BLVK Unicorn UniApple", desc: "Crisp red apple candy note." },
+          { name: "Humble Smash Mouth", desc: "Strawberry custard graham." },
+          { name: "Humble American Dream", desc: "Berries with cereal crunch." },
+          { name: "Dinner Lady Strawberry Macaroon", desc: "Almond coconut macaroon touch." },
+          { name: "Dinner Lady Blackberry Crumble", desc: "Warm crumble with dark berries." }
         ]
       };
 
@@ -134,7 +614,6 @@
 
       // ===== UI helpers =====
       const cn = (...c) => c.filter(Boolean).join(" ");
-
       const IconPhone = ({ className="" }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.31 1.78.57 2.63a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.54-.23a2 2 0 0 1 2.11.45c.85.26 1.73.45 2.63.57A2 2 0 0 1 22 16.92z" />
@@ -173,6 +652,10 @@
                 <a className="text-sm text-white/80 hover:text-white" href="#/rewards">Rewards</a>
                 <a className="text-sm text-white/80 hover:text-white" href="#/visit">Visit</a>
               </nav>
+              <div className="flex items-center gap-3">
+                <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>Call</Button>
+                <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noreferrer">Location</Button>
+              </div>
             </div>
           </header>
         );
@@ -208,9 +691,7 @@
             <a href="#/" className="mt-4 inline-block rounded-lg bg-emerald-500 px-4 py-2 text-black hover:bg-emerald-400">Go Home</a>
           </main>
         );
-
         const items = INVENTORY[slug] || [];
-
         return (
           <main className="mx-auto max-w-7xl px-4 py-12">
             <div className="mb-6 text-sm text-white/60"><a href="#/" className="underline decoration-emerald-400">Home</a> / {cat.title}</div>
@@ -223,7 +704,7 @@
               {items.length > 0 ? (
                 items.map((it, idx) => (
                   <div key={idx} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="aspect-[4/3] w-full rounded-xl bg-black/40 flex items-center justify-center text-xs text-white/40">Cigar</div>
+                    <div className="aspect-[4/3] w-full rounded-xl bg-black/40 flex items-center justify-center text-xs text-white/40">Item</div>
                     <p className="mt-3 text-sm font-semibold">{it.name}</p>
                     <p className="text-xs text-white/60">{it.desc}</p>
                   </div>
@@ -258,7 +739,7 @@
             <h1 className="text-2xl font-semibold">Visit Dragon Smoke Shop</h1>
             <p className="mt-2 text-white/70">2645 S Lapeer Rd, Lake Orion (Orion Township), MI 48360</p>
             <div className="mt-4 flex items-center justify-center gap-3">
-              <a className="rounded-lg bg-emerald-500 px-4 py-2 text-black hover:bg-emerald-400" href={"tel:+12489774864"}>Call {PHONE}</a>
+              <a className="rounded-lg bg-emerald-500 px-4 py-2 text-black hover:bg-emerald-400" href={PHONE_TEL}>Call {PHONE}</a>
               <a className="rounded-lg bg-white/10 px-4 py-2 hover:bg-white/20" target="_blank" rel="noreferrer" href={MAPS_URL}>Directions</a>
             </div>
           </main>
@@ -295,11 +776,24 @@
           const onHome = () => !!document.querySelector('#categories');
           console.assert(onHome(), 'Home should render the Categories section');
           const prev = window.location.hash;
-          window.location.hash = '#/c/cigars';
+
+          window.location.hash = '#/c/thca-cbd-hemp';
           setTimeout(() => {
-            const hasCigarsHeading = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /Cigars/i.test(el.textContent));
-            console.assert(hasCigarsHeading, 'Cigars page should render a heading containing "Cigars"');
-            window.location.hash = prev || '#/';
+            const hasHemp = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /THCA|CBD|Hemp/i.test(el.textContent));
+            console.assert(hasHemp, 'THCA & CBD / Hemp page should render');
+
+            window.location.hash = '#/c/blunt-hemp-wraps';
+            setTimeout(() => {
+              const hasWraps = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /Blunt|Wraps/i.test(el.textContent));
+              console.assert(hasWraps, 'Blunt & Hemp Wraps page should render');
+
+              window.location.hash = '#/c/vape-juice';
+              setTimeout(() => {
+                const hasVJ = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /Vape Juice/i.test(el.textContent));
+                console.assert(hasVJ, 'Vape Juice page should render');
+                window.location.hash = prev || '#/';
+              }, 0);
+            }, 0);
           }, 0);
         } catch (e) {
           console.warn('Smoke tests encountered an issue:', e);
