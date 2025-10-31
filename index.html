@@ -8,6 +8,79 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2310b981'/%3E%3Ctext x='50' y='58' font-size='58' text-anchor='middle' fill='%23000'%3EDS%3C/text%3E%3C/svg%3E" />
 
     <!-- Tailwind + React + Babel -->
+    <!-- Fancy Visual Config (fonts + Tailwind theme extensions) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
+<script>
+  window.tailwind = window.tailwind || {};
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          display: ['Outfit', 'Inter', 'ui-sans-serif', 'system-ui'],
+        },
+        boxShadow: {
+          glow: '0 0 0 1px rgba(16,185,129,.45), 0 10px 30px rgba(16,185,129,.25)',
+        },
+        keyframes: {
+          float: { '0%,100%': { transform: 'translateY(0px)'}, '50%': { transform: 'translateY(-12px)'} },
+          fadeInUp: { '0%': { opacity: 0, transform: 'translateY(8px) scale(.98)'}, '100%': { opacity: 1, transform: 'translateY(0) scale(1)'} },
+          shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } }
+        },
+        animation: {
+          float: 'float 14s ease-in-out infinite',
+          fadeInUp: 'fadeInUp .5s ease both',
+          shimmer: 'shimmer 3s linear infinite',
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Fancy Visual Config (Fonts + Tailwind Theme Extensions) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+
+<script>
+  window.tailwind = window.tailwind || {};
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          display: ['Outfit', 'Inter', 'ui-sans-serif', 'system-ui'],
+        },
+        boxShadow: {
+          glow: '0 0 0 1px rgba(16,185,129,.45), 0 10px 30px rgba(16,185,129,.25)',
+        },
+        keyframes: {
+          float: { 
+            '0%,100%': { transform: 'translateY(0px)'}, 
+            '50%': { transform: 'translateY(-12px)'} 
+          },
+          fadeInUp: { 
+            '0%': { opacity: 0, transform: 'translateY(8px) scale(.98)'}, 
+            '100%': { opacity: 1, transform: 'translateY(0) scale(1)'} 
+          },
+          shimmer: { 
+            '0%': { backgroundPosition: '-200% 0' }, 
+            '100%': { backgroundPosition: '200% 0' } 
+          }
+        },
+        animation: {
+          float: 'float 14s ease-in-out infinite',
+          fadeInUp: 'fadeInUp .5s ease both',
+          shimmer: 'shimmer 3s linear infinite',
+        }
+      }
+    }
+  }
+</script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -18,7 +91,24 @@
       a,button{-webkit-tap-highlight-color:transparent}
     </style>
   </head>
-  <body class="bg-black text-white">
+<body class="bg-black text-white font-sans">
+  <!-- 🌌 Ambient Animated Background Layer -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
+    <!-- Dark gradient base -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-zinc-900 to-black"></div>
+
+    <!-- Floating glow blobs -->
+    <div class="absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-emerald-500/15 blur-3xl animate-float"></div>
+    <div class="absolute top-1/3 -right-28 h-[32rem] w-[32rem] rounded-full bg-teal-400/10 blur-3xl animate-[float_16s_ease-in-out_infinite_reverse]"></div>
+
+    <!-- Subtle texture overlay -->
+    <div class="absolute inset-0 opacity-[.07] mix-blend-soft-light"
+         style="background-image:url('data:image/svg+xml;utf8,\
+           <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>\
+           <filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%222%22/></filter>\
+           <rect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.5%22/></svg>');">
+    </div>
+  </div>
     <div id="root"></div>
 
     <script type="text/babel">
@@ -905,30 +995,40 @@
       };
 
       // ===== Sections =====
-      function Header() {
-        return (
-          <header className="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur">
-            <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-inner" />
-                <div className="leading-tight">
-                  <p className="text-lg font-bold tracking-wide">Dragon Smoke Shop</p>
-                  <p className="text-xs text-white/60">Your one-stop shop</p>
-                </div>
-              </div>
-              <nav className="hidden gap-6 md:flex">
-                <a className="text-sm text-white/80 hover:text-white" href="#/">Shop</a>
-                <a className="text-sm text-white/80 hover:text-white" href="#/rewards">Rewards</a>
-                <a className="text-sm text-white/80 hover:text-white" href="#/visit">Visit</a>
-              </nav>
-              <div className="flex items-center gap-3">
-                <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>Call</Button>
-                <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noreferrer">Location</Button>
-              </div>
-            </div>
-          </header>
-        );
-      }
+function Header() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-black/70 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
+
+        {/* ✅ Clickable Logo + Name */}
+        <a href="#/" className="flex items-center gap-3 hover:opacity-90 transition">
+          <img
+            src="4d64dbe6-5bf5-4c10-9a4a-022be947281d.png"
+            alt="Dragon Smoke Shop Logo"
+            className="h-9 w-9 rounded-xl object-cover shadow-inner ring-1 ring-white/10"
+          />
+          <div className="leading-tight">
+            <p className="text-lg font-bold tracking-wide">Dragon Smoke Shop</p>
+            <p className="text-xs text-white/60">Your one-stop shop</p>
+          </div>
+        </a>
+
+        {/* keep the rest of your header below */}
+        <nav className="hidden gap-6 md:flex">
+          <a className="text-sm text-white/80 hover:text-white" href="#/">Shop</a>
+          <a className="text-sm text-white/80 hover:text-white" href="#/rewards">Rewards</a>
+          <a className="text-sm text-white/80 hover:text-white" href="#/visit">Visit</a>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Button className="bg-emerald-500 text-black hover:bg-emerald-400" href={PHONE_TEL}>Call</Button>
+          <Button className="bg-emerald-900/30 text-white hover:bg-emerald-800/40" href={MAPS_URL} target="_blank" rel="noreferrer">Location</Button>
+        </div>
+
+      </div>
+    </header>
+  );
+}
 
       function Categories() {
         return (
