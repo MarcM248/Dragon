@@ -45,7 +45,7 @@
         { title: "Cigarettes", desc: "Top brands & value" },
         { title: "Vapes", desc: "Disposables & devices" },
         { title: "Nicotine Pouches", desc: "ZYN, FRE, more" },
-        { title: "Vape Juice / E-Liquid", slug: "vape-juice", desc: "Popular flavors & sizes" }, // <- slug aligned with INVENTORY key
+        { title: "Vape Juice / E-Liquid", slug: "vape-juice", desc: "Popular flavors & sizes" }, // keep slug aligned to INVENTORY
         { title: "Blunt & Hemp Wraps", desc: "All the wraps you want" },
         { title: "THCA & CBD / Hemp", desc: "Flower, carts, gummies" },
         { title: "Mods & Coils", desc: "Setups, tanks, parts" },
@@ -295,9 +295,7 @@
           { name: "Grinds Coffee Pouches – Caramel", desc: "Sweet caramel flavor for non-tobacco users." }
         ],
 
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // BLUNT & HEMP WRAPS
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         "blunt-hemp-wraps": [
           { name: "High Hemp – Original", desc: "Classic organic hemp wraps; smooth, slow burn." },
           { name: "High Hemp – Honey Pot Swirl", desc: "Light honey notes on an organic hemp base." },
@@ -379,11 +377,8 @@
           { name: "Hemp Wick – 10ft", desc: "Beeswax-coated hemp; clean light." }
         ],
 
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         // THCA & CBD / HEMP
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         "thca-cbd-hemp": [
-          // THCA Flower (hemp-derived; <0.3% Δ9 per dry weight)
           { name: "THCA Flower – Ice Cream Cake (3.5g)", desc: "Dense buds; sweet, creamy aroma." },
           { name: "THCA Flower – Gelato 41 (3.5g)", desc: "Dessert terp notes; well-trimmed nugs." },
           { name: "THCA Flower – Apple Fritter (3.5g)", desc: "Crisp apple pastry scent; sticky cure." },
@@ -397,7 +392,6 @@
           { name: "THCA Flower – Donny Burger (7g)", desc: "Savory-gassy profile; larger jar." },
           { name: "THCA Flower – Jealousy (7g)", desc: "Bold dessert funk; showcase jar." },
 
-          // THCA Pre-Rolls
           { name: "THCA Pre-Roll – Rainbow Belts (1g)", desc: "Cone-style; smooth, candy terp note." },
           { name: "THCA Pre-Roll – Lemon Cherry Gelato (1g)", desc: "Citrus dessert aroma; even burn." },
           { name: "THCA Pre-Roll – Gary Payton (1g)", desc: "Gas + cookie dough scent; firm pack." },
@@ -405,7 +399,6 @@
           { name: "THCA Diamond-Infused Pre-Roll – Kush Mints (1.5g)", desc: "Rolled with THCA diamonds; slow burn." },
           { name: "THCA Kief-Dusted Pre-Roll – Grape Gas (1.25g)", desc: "Kief-coated finish; flavorful pull." },
 
-          // THCA Vapes (carts)
           { name: "THCA Cart 1g – Wedding Cake", desc: "Glass cart; ceramic coil; dessert terps." },
           { name: "THCA Cart 1g – Blue Zkittlez", desc: "Fruit candy profile; smooth draw." },
           { name: "THCA Cart 1g – Super Lemon Haze", desc: "Bright citrus; crisp inhale." },
@@ -415,7 +408,6 @@
           { name: "THCA Cart 2g – Apple Fritter", desc: "Bigger cart; crisp pastry note." },
           { name: "THCA Cart 2g – Mango Kush", desc: "Tropical mango nose; reliable hardware." },
 
-          // THCA Disposables
           { name: "THCA Disposable 2g – Rainbow Sherbet", desc: "USB-C recharge; mesh coil device." },
           { name: "THCA Disposable 2g – Gushers", desc: "Candy fruit terp; consistent output." },
           { name: "THCA Disposable 3g – Cereal Milk", desc: "Large reservoir; dessert profile." },
@@ -423,7 +415,6 @@
           { name: "THCA Disposable 4g – Northern Lights", desc: "Long-lasting device; classic pine note." },
           { name: "THCA Disposable 4g – Blackberry Kush", desc: "Dark berry nose; even performance." },
 
-          // CBD Gummies (hemp-derived; clearly labeled mg per jar)
           { name: "CBD Gummies – Mixed Fruit (750mg)", desc: "30ct jar; ~25mg each; pectin-based." },
           { name: "CBD Gummies – Watermelon Rings (1000mg)", desc: "Sugar-coated rings; vegan recipe." },
           { name: "CBD Gummies – Blue Razz (1500mg)", desc: "High-mg jar; lab-tested batch." },
@@ -433,47 +424,38 @@
           { name: "CBD+CBG Day Gummies – Citrus (900mg)", desc: "Daytime blend; citrus flavor." },
           { name: "Delta-9 Compliant Gummies – Strawberry (10mg ea)", desc: "Hemp-derived; compliant per serving." },
 
-          // CBD Tinctures
           { name: "CBD Tincture 1000mg – Natural", desc: "MCT carrier; graduated dropper." },
           { name: "CBD Tincture 2000mg – Mint", desc: "Mint flavor; batch QR code." },
           { name: "Full-Spectrum CBD Tincture 1500mg – Citrus", desc: "Hemp extract; citrus note." },
           { name: "Broad-Spectrum CBD Tincture 1500mg – Berry", desc: "THC-free broad spectrum; berry taste." },
 
-          // CBD Topicals
           { name: "CBD Freeze Roll-On 1000mg", desc: "Roll-on applicator; mentholated feel." },
           { name: "CBD Balm 1000mg – Eucalyptus", desc: "Beeswax base; eucalyptus aroma." },
           { name: "CBD Lotion 1000mg – Unscented", desc: "Everyday lotion; pump bottle." },
           { name: "CBD Salve 2000mg – Cooling", desc: "High-mg tin; smooth spread." },
 
-          // CBD/CBN/CBG Vapes (non-THCA)
           { name: "CBD Vape Cart 1g – Strawberry Fields", desc: "Ceramic cart; gentle strawberry note." },
           { name: "CBD Vape Cart 1g – OG Kush (Terpene Blend)", desc: "Botanical terps; classic profile." },
           { name: "CBD/CBN Night Cart 1g – Blueberry", desc: "Evening terp blend; glass cart." },
           { name: "CBD/CBG Day Cart 1g – Lemon Haze", desc: "Citrus terpene blend; bright notes." },
 
-          // Pet CBD
           { name: "Pet CBD Oil 500mg – Salmon", desc: "Dropper bottle; easy mix-in." },
           { name: "Pet CBD Chews 300mg – Chicken", desc: "Soft chews; re-sealable pouch." },
 
-          // Hemp Drinks
           { name: "Hemp Seltzer – Lemon (25mg CBD)", desc: "12oz can; light lemon sparkle." },
           { name: "Hemp Seltzer – Black Cherry (25mg CBD)", desc: "12oz can; crisp cherry finish." },
 
-          // THCA Diamonds & Concentrates
           { name: "THCA Diamonds 1g – Unflavored", desc: "Glass puck; clear crystalline." },
           { name: "THCA Live Rosin 1g – Trop Cookies", desc: "Solventless rosin; tropical nose." },
           { name: "THCA Badder 1g – Candy Gas", desc: "Whipped texture; sweet-gassy aroma." },
 
-          // CBD Capsules & Misc
           { name: "CBD Softgels 25mg (30ct)", desc: "Once-daily format; easy travel." },
           { name: "CBD Isolate Powder 1g (99%)", desc: "Unflavored isolate; scoop included." },
           { name: "CBD Honey Sticks (10-pack)", desc: "Single-serve sticks; easy mix-in." },
           { name: "CBD Bath Bomb – Lavender (100mg)", desc: "Single bath fizzer; relaxing scent." }
         ],
 
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        // VAPE JUICE / E-LIQUID
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // VAPE JUICE / E-LIQUID (50+)
         "vape-juice": [
           { name: "Air Factory Blue Razz", desc: "Sweet and tangy blue raspberry blend." },
           { name: "Air Factory Strawberry Kiwi", desc: "Juicy strawberry with kiwi twist." },
@@ -516,7 +498,6 @@
           { name: "Air Factory Arctic Berry", desc: "Frosted mixed berry blend." },
           { name: "Air Factory Mint", desc: "Pure menthol mint; clean and refreshing." },
 
-          // Added list
           { name: "Jam Monster Blueberry", desc: "Blueberry jam on toast vibe." },
           { name: "Jam Monster Raspberry", desc: "Sweet-tart raspberry jam finish." },
           { name: "Sadboy Butter Cookie", desc: "Buttery cookie with light lemon." },
@@ -585,6 +566,78 @@
           { name: "Humble American Dream", desc: "Berries with cereal crunch." },
           { name: "Dinner Lady Strawberry Macaroon", desc: "Almond coconut macaroon touch." },
           { name: "Dinner Lady Blackberry Crumble", desc: "Warm crumble with dark berries." }
+        ],
+
+        // MODS & COILS
+        "mods-coils": [
+          // Starter Pod Mods
+          { name: "SMOK Nord 5 Kit", desc: "Upgraded airflow system; compatible with RPM 3 coils; 2000mAh battery." },
+          { name: "SMOK Novo 5 Kit", desc: "Compact design with adjustable wattage and mesh pods." },
+          { name: "SMOK RPM 85 Kit", desc: "Pod-mod with 3000mAh battery and RPM 2 coil compatibility." },
+          { name: "Voopoo Drag S PNP-X Kit", desc: "Internal battery mod; PnP-X tank; fast firing and vivid display." },
+          { name: "Voopoo Drag X PNP-X Kit", desc: "External 18650 battery version; precise wattage control." },
+          { name: "Voopoo Argus P1S", desc: "Transparent zinc alloy body; Type-C quick charge." },
+          { name: "GeekVape Aegis Boost 2 (B60)", desc: "Rugged IP68 build; leakproof top airflow design." },
+          { name: "GeekVape Aegis Boost Pro 2 (B100)", desc: "Up to 100W output; advanced chipset; long-lasting battery." },
+          { name: "OXVA Xlim Pro", desc: "Bright display; Xlim V3 pods; adjustable wattage; USB-C charge." },
+          { name: "Uwell Caliburn G3 Pod System", desc: "New mesh pods; improved flavor delivery and tight MTL draw." },
+          { name: "Vaporesso XROS 3", desc: "Compact, sleek pod system with AXON chip and long pod life." },
+          { name: "Vaporesso XROS 3 Mini", desc: "Pocket-sized XROS; perfect for salt nicotine users." },
+          { name: "Vaporesso Luxe Q2 SE", desc: "Stylish pod system with textured grip and consistent output." },
+          { name: "Freemax Galex Nano", desc: "Compact pod kit with FM Leak-Resistant Tech and LED visuals." },
+          { name: "Lost Vape Ursa Nano Pro", desc: "Refined pod kit with replaceable coils and adjustable airflow." },
+          { name: "Aspire Flexus Q", desc: "Ultra-light pod mod; auto-draw; adjustable wattage; Type-C." },
+          { name: "Innokin Kroma Z Pod Mod", desc: "Z-coil compatibility; 3000mAh battery; flavor-focused design." },
+
+          // Box Mods
+          { name: "GeekVape Aegis Legend 2 (L200)", desc: "Dual 18650; durable IP68 mod; new UI; lightweight chassis." },
+          { name: "GeekVape Aegis X", desc: "2.4-inch color screen; dual battery; shock and water resistant." },
+          { name: "Voopoo Drag 4 Mod", desc: "Gene.TT 2.0 chip; elegant wood panels; up to 177W." },
+          { name: "Vaporesso Gen 200 Mod", desc: "Compact dual-battery device with AXON chip; responsive UI." },
+          { name: "Vaporesso Target 200 Kit", desc: "Water-resistant mod with iTank; smooth airflow control." },
+          { name: "Lost Vape Thelema Quest 200W", desc: "Dual 18650; Quest 2.0 chip; multiple vaping modes." },
+          { name: "SMOK Morph 2 Kit", desc: "230W dual-battery mod with TFV18 tank; powerful and stylish." },
+          { name: "SMOK Rigel Kit", desc: "18650 dual mod; vivid TFT screen; TFV9 tank included." },
+          { name: "Aspire Zelos X Kit", desc: "Single 18650 box mod with Nautilus 3 tank; classic flavor system." },
+
+          // Tanks & RDAs
+          { name: "HorizonTech Falcon 2 Tank", desc: "Mesh coils for dense clouds; smooth airflow." },
+          { name: "Freemax M Pro 3 Tank", desc: "FM CoilTech 5.0 mesh coil; huge flavor; leak-resistant." },
+          { name: "GeekVape Z Sub-Ohm Tank", desc: "Top airflow; mesh coil system; anti-leak design." },
+          { name: "Voopoo MAAT Tank", desc: "Dual-inlet airflow; PnP coil compatibility; bold design." },
+          { name: "SMOK TFV18 Tank", desc: "Massive capacity; extreme vapor output; high wattage support." },
+          { name: "Vaporesso iTank 2", desc: "Turbo airflow system; GTX coil compatible; durable build." },
+          { name: "Hellvape Dead Rabbit RDA V3", desc: "Dual airflow slots; optimized for flavor and vapor." },
+          { name: "Wotofo Recurve V2 RDA", desc: "Smooth curve deck; side airflow; ideal for squonking setups." },
+
+          // Replacement Coils
+          { name: "SMOK RPM 2 Coils 0.16Ω", desc: "Mesh coil for dense vapor; DTL draw." },
+          { name: "SMOK RPM 3 Coils 0.23Ω", desc: "Optimized for RPM 85/100; clean flavor." },
+          { name: "SMOK Nord 5 Mesh Coils", desc: "RPM 3 compatible; improved airflow for flavor delivery." },
+          { name: "Voopoo PnP-TW30 Coils", desc: "PnP system; mesh heating core; clean vapor." },
+          { name: "Voopoo PnP-DW60 Coils", desc: "High-efficiency core; longer lifespan; lower resistance." },
+          { name: "GeekVape B Series Coils", desc: "Boost compatible; smooth flavor; reliable performance." },
+          { name: "GeekVape Z Series Coils", desc: "Sub-ohm coils for Zeus tanks; massive cloud output." },
+          { name: "Vaporesso GTX Mesh Coils 0.2Ω", desc: "AXON chip compatible; clean and rich taste." },
+          { name: "Vaporesso GTi Mesh Coils 0.4Ω", desc: "iTank compatible; quick ramp-up time." },
+          { name: "Freemax M1-D Mesh Coils", desc: "FM CoilTech 5.0 mesh; longer life; great vapor density." },
+          { name: "Uwell Caliburn G Coils 1.0Ω", desc: "MTL style; consistent hits; clean vapor." },
+          { name: "Uwell Caliburn G2 Coils 0.8Ω", desc: "Balanced throat hit; tight draw experience." },
+          { name: "OXVA Xlim V3 Coils", desc: "Leak-proof design; consistent delivery." },
+          { name: "Aspire BVC Coils (Nautilus)", desc: "Classic coil; great for salt nic; reliable longevity." },
+          { name: "Innokin Z Coils (Kroma-Z / Zenith)", desc: "Clean flavor production; durable construction." },
+
+          // Batteries, Chargers & Accessories
+          { name: "Efest 18650 3000mAh Battery", desc: "High-drain rechargeable battery; reliable performance." },
+          { name: "Samsung 30Q 18650 Battery", desc: "Trusted for dual mods; balanced capacity and discharge." },
+          { name: "Sony VTC5A 18650 Battery", desc: "High-performance cell; ideal for sub-ohm vaping." },
+          { name: "Nitecore i2 Intellicharger", desc: "Smart dual-bay charger with safety protections." },
+          { name: "Nitecore D4 Digicharger", desc: "Four-bay smart charger; LCD display and auto detection." },
+          { name: "Vapcell Q4 Battery Charger", desc: "Compact, 4-slot USB-powered charger; safe and reliable." },
+          { name: "Battery Wraps & Cases", desc: "Replacement wraps and holders for 18650/21700 batteries." },
+          { name: "Coil Master DIY Kit Mini V3", desc: "Essential tools for custom coil building." },
+          { name: "Organic Cotton Bacon Prime", desc: "High-grade wicking cotton for rebuildables." },
+          { name: "Kanthal A1 Wire 24ga Spool", desc: "Ideal for rebuildable coils; durable resistance wire." }
         ]
       };
 
@@ -791,7 +844,14 @@
               setTimeout(() => {
                 const hasVJ = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /Vape Juice/i.test(el.textContent));
                 console.assert(hasVJ, 'Vape Juice page should render');
-                window.location.hash = prev || '#/';
+
+                window.location.hash = '#/c/mods-coils';
+                setTimeout(() => {
+                  const hasMods = Array.from(document.querySelectorAll('h1, h2, h3')).some(el => /Mods|Coils/i.test(el.textContent));
+                  console.assert(hasMods, 'Mods & Coils page should render');
+
+                  window.location.hash = prev || '#/';
+                }, 0);
               }, 0);
             }, 0);
           }, 0);
