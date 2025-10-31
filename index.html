@@ -45,7 +45,7 @@
         { title: "Cigarettes", desc: "Top brands & value" },
         { title: "Vapes", desc: "Disposables & devices" },
         { title: "Nicotine Pouches", desc: "ZYN, FRE, more" },
-        { title: "Vape Juice / E-Liquid", slug: "vape-juice", desc: "Popular flavors & sizes" }, // keep slug aligned to INVENTORY
+        { title: "Vape Juice / E-Liquid", slug: "vape-juice", desc: "Popular flavors & sizes" },
         { title: "Blunt & Hemp Wraps", desc: "All the wraps you want" },
         { title: "THCA & CBD / Hemp", desc: "Flower, carts, gummies" },
         { title: "Mods & Coils", desc: "Setups, tanks, parts" },
@@ -57,6 +57,102 @@
 
       // ===== Inventory Data (by category slug) =====
       const INVENTORY = {
+        // ✅ TOBACCO (moved inside INVENTORY)
+        tobacco: [
+          // RYO / Loose Leaf (pouches, bags, cans)
+          { name: "Bugler Original RYO (1.5oz Pouch)", desc: "Classic blue pouch; includes papers." },
+          { name: "Bugler Original RYO (8oz Can)", desc: "Economy can for frequent RYO customers." },
+          { name: "Drum Original RYO (1.5oz Pouch)", desc: "Rich European-style shag cut." },
+          { name: "Top Red RYO (6oz Can)", desc: "Value-forward American blend; easy roll." },
+          { name: "Gambler Original RYO (16oz Bag)", desc: "Large bag; smooth everyday cut." },
+          { name: "Gambler Gold (Light) RYO (16oz Bag)", desc: "Lighter blend; consistent burn." },
+          { name: "OHM Blue RYO (16oz Bag)", desc: "Balanced blue blend; good moisture." },
+          { name: "OHM Red (Full) RYO (16oz Bag)", desc: "Full-bodied; robust aroma." },
+          { name: "OHM Silver (Light) RYO (16oz Bag)", desc: "Mellow smooth profile." },
+          { name: "Golden Harvest Yellow RYO (16oz Bag)", desc: "Bright, mellow cut; clean finish." },
+          { name: "Golden Harvest Red RYO (16oz Bag)", desc: "Full flavor; steady burn." },
+          { name: "Smoker’s Pride Original (12oz Bag)", desc: "Budget-friendly bulk blend." },
+          { name: "Smoker’s Pride Menthol (12oz Bag)", desc: "Cool menthol accent; easy to roll." },
+          { name: "Largo Blue RYO (16oz Bag)", desc: "Smooth value cut; everyday favorite." },
+          { name: "American Spirit Organic RYO (Pouch)", desc: "Additive-free loose leaf; distinctive flavor." },
+
+          // Pipe Tobacco
+          { name: "Captain Black Original (12oz Tin)", desc: "Iconic aromatic; vanilla-cocoa room note." },
+          { name: "Captain Black Gold (12oz Tin)", desc: "Lighter aromatic; creamy sweetness." },
+          { name: "Captain Black Royal (7oz Pouch)", desc: "Vanilla-forward; smooth draw." },
+          { name: "Lane Limited 1-Q (Bulk Bag)", desc: "Best-seller aromatic; caramel/vanilla." },
+          { name: "Lane Limited BCA (Bulk Bag)", desc: "Black Cavendish; silky sweet smoke." },
+          { name: "Lane RLP-6 (Bulk Bag)", desc: "Balanced Cavendish with light cocoa." },
+          { name: "Prince Albert Pipe Tobacco (14oz Can)", desc: "Classic American burley; dependable cut." },
+          { name: "Carter Hall Pipe Tobacco (14oz Can)", desc: "Smooth, nutty burley; easy pack." },
+          { name: "Sir Walter Raleigh Original (14oz Can)", desc: "Lightly aromatic; classic profile." },
+          { name: "Borkum Riff Bourbon Whiskey (7oz Pouch)", desc: "Bourbon-aromatic; mellow smoke." },
+          { name: "Mac Baren 7 Seas Regular (3.5oz Tin)", desc: "Aromatic Cavendish with vanilla." },
+          { name: "Sutliff Molto Dolce (Tin)", desc: "Dessert-level sweetness; creamy clouds." },
+          { name: "Peterson Early Morning Pipe (Tin)", desc: "Gentle English; creamy & bright." },
+          { name: "Peterson Nightcap (Tin)", desc: "Full English; rich, smoky Latakia." },
+          { name: "Cornell & Diehl Autumn Evening (Tin)", desc: "Maple-cased Cavendish; cozy room note." },
+          { name: "Amphora Full Aroma (Pouch)", desc: "Classic fruity aromatic blend." },
+          { name: "Stokkebye Luxury Navy Flake (Bulk)", desc: "Virginias with light rum; flake cut." },
+
+          // Chew / Moist Snuff / Snus
+          { name: "Grizzly Wintergreen Pouches", desc: "Popular wintergreen in tidy pouches." },
+          { name: "Grizzly Straight Long Cut", desc: "Bold straight flavor; long-cut texture." },
+          { name: "Copenhagen Long Cut Straight", desc: "Classic profile; clean finish." },
+          { name: "Copenhagen Wintergreen Long Cut", desc: "Wintergreen kick; smooth pack." },
+          { name: "Skoal Wintergreen Pouches", desc: "Easy, tidy pouches with wintergreen." },
+          { name: "Kodiak Wintergreen Long Cut", desc: "Strong wintergreen; lasting flavor." },
+          { name: "Timber Wolf Long Cut Natural", desc: "Value long-cut with classic taste." },
+          { name: "Longhorn Wintergreen Pouches", desc: "Budget pouches; fresh wintergreen." },
+          { name: "America’s Best Chew Original (Levi Garrett)", desc: "Loose leaf chew; classic sweetness." },
+          { name: "Red Man Golden Blend (America’s Best Chew)", desc: "Smooth sweet chew; easy texture." },
+          { name: "Beech-Nut Original Chew", desc: "Traditional chew leaf; mellow." },
+          { name: "Stoker’s Long Cut Mint (Tub)", desc: "Big value tub; scoop & pack." },
+          { name: "Stoker’s Long Cut Straight (Tub)", desc: "Rich straight flavor; long-lasting." },
+          { name: "General Snus Mint (Can)", desc: "Scandinavian-style snus; cool mint." },
+
+          // Rollers, Injectors & Tubes
+          { name: "Top Cigarette Tubes – King Size (200ct)", desc: "Standard king size; white filter." },
+          { name: "Top Cigarette Tubes – 100’s (200ct)", desc: "Longer 100s tubes; smooth draw." },
+          { name: "Zen Cigarette Tubes – King (200ct)", desc: "Even burn; firm filters." },
+          { name: "Zen Cigarette Tubes – 100’s (200ct)", desc: "100s length; clean pull." },
+          { name: "Premier Tubes – Menthol King (200ct)", desc: "Mint filter; crisp taste." },
+          { name: "Gambler Tubes – Red King (200ct)", desc: "Firm pack; value choice." },
+          { name: "Powermatic II+ Electric Injector", desc: "Customer-favorite electric tube injector." },
+          { name: "Top-O-Matic T2 Manual Injector", desc: "Sturdy manual tabletop injector." },
+          { name: "Top-O-Matic Mini Injector", desc: "Compact hand-crank; travel friendly." },
+          { name: "RAW 70mm Cigarette Roller", desc: "For single-width papers; classic." },
+          { name: "RAW 79mm Cigarette Roller", desc: "Standard 1¼ size roller." },
+          { name: "RAW 110mm Roller (King Size)", desc: "King & slim papers roller." },
+
+          // Papers, Cones, Tips & Filters
+          { name: "OCB Premium Slim Papers", desc: "Ultra-thin, slow burn; slim format." },
+          { name: "OCB Virgin 1¼ Papers", desc: "Unbleached paper; clean taste." },
+          { name: "Elements Rice Papers (1¼)", desc: "Ultra-thin rice; even burn." },
+          { name: "Elements King Size Slim", desc: "Slow burn; magnetic pack." },
+          { name: "Rizla Blue (Medium) 1¼", desc: "Classic Euro paper; easy roll." },
+          { name: "JOB Gold 1¼ Papers", desc: "Smooth gumline; timeless look." },
+          { name: "Zig-Zag Orange 1¼", desc: "Iconic orange booklet; reliable." },
+          { name: "Zig-Zag King Size Slim", desc: "Longer format; steady burn." },
+          { name: "RAW Classic 1¼ Papers", desc: "Unrefined gumline; staple papers." },
+          { name: "RAW Black King Size Slim", desc: "Ultra-thin; super-slow burn." },
+          { name: "RAW Cones 1¼ (6-Pack)", desc: "Pre-rolled convenience; straight fill." },
+          { name: "RAW Cones King Size (3-Pack)", desc: "Even pack; perfect tip shape." },
+          { name: "RAW Tips (Pre-Rolled)", desc: "Pre-rolled filter tips; tidy airflow." },
+          { name: "RAW Wide Tips (Booklet)", desc: "Extra-stable filters; easy fold." },
+          { name: "Zen Premium Filters (200ct)", desc: "RYO filters; standard size." },
+
+          // Pipe & Humidor Accessories
+          { name: "Pipe Cleaners – Bristle (40ct)", desc: "Stiff bristle for deep clean." },
+          { name: "Pipe Cleaners – Fluffy (40ct)", desc: "Soft absorbent cleaners." },
+          { name: "Medico Pipe Filters (10ct)", desc: "Absorbent paper filters for pipes." },
+          { name: "3-in-1 Pipe Tool (Tamp/Ream/Pick)", desc: "Essential maintenance tool." },
+          { name: "Missouri Meerschaum Corn Cob Pipe", desc: "Affordable, cool-smoking cob." },
+          { name: "Budget Briar Pipe (Assorted)", desc: "Entry-level briar; various shapes." },
+          { name: "Boveda 62% (2-Way Humidity Pack)", desc: "Keeps RYO & pipe tobacco fresh." },
+          { name: "Boveda 69% (2-Way Humidity Pack)", desc: "Higher humidity for leaf storage." }
+        ],
+
         cigars: [
           { name: "Arturo Fuente Hemingway Short Story", desc: "Dominican classic; cedar, nuts, and a touch of sweetness." },
           { name: "Arturo Fuente 8-5-8 Natural", desc: "Medium body; creamy smoke with earthy undertones." },
@@ -696,12 +792,12 @@
       // ===== UI helpers =====
       const cn = (...c) => c.filter(Boolean).join(" ");
       const IconPhone = ({ className="" }) => (
-        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.31 1.78.57 2.63a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.54-.23a2 2 0 0 1 2.11.45c.85.26 1.73.45 2.63.57A2 2 0 0 1 22 16.92z" />
         </svg>
       );
       const IconMapPin = ({ className="" }) => (
-        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
